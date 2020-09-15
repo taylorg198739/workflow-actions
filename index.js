@@ -8,8 +8,8 @@ try {
   const zhToken = core.getInput('zh_token');
   const zhWorkspaceId = core.getInput('zh_workspace_id');
   const zhInprogressId = core.getInput('zh_in_progress_id');
-  const issueNumber = parseInt(github.context.payload.ref.split('/')[2], 10);
-  console.log('payload: ',  github.context.payload);
+  const issueNumber = parseInt(github.context.payload.ref.split('/')[0], 10);
+  console.log('payload: ',  github.context.payload.ref);
   console.log('Issue Number: ', issueNumber);
   const isValidBranch = typeof issueNumber === 'number';
 
