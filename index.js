@@ -11,7 +11,7 @@ try {
   const test = repoId == '289868612';
 
   console.log(`all info data:  ${nameToGreet}!, ${test}, ${gitref}, ${repoId}, ${zhToken}, ${zhWorkspaceId}, ${zhInprogressId}`);
-  const test1 = `${nameToGreet}, ${gitref}, ${repoId}, ${test}, ${zhToken.length}, ${zhWorkspaceId='***'}, ${zhInprogressId}`
+  const test1 = `${nameToGreet}, ${gitref}, ${repoId}, ${test}, ${zhToken.length}, ${zhWorkspaceId}, ${zhInprogressId}`
 
   core.setOutput("output", test1);
   // Get the JSON webhook payload for the event that triggered the workflow
