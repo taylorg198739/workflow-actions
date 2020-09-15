@@ -8,9 +8,10 @@ try {
   const zhToken = core.getInput('zh_token');
   const zhWorkspaceId = core.getInput('zh_workspace_id');
   const zhInprogressId = core.getInput('zh_in_progress_id');
+  const test = repoId == '289868612';
 
-  console.log(`all info data:  ${nameToGreet}!, ${gitref}, ${repoId}, ${zhToken}, ${zhWorkspaceId}, ${zhInprogressId}`);
-  const test = `${nameToGreet}, ${gitref}, ${repoId==='289868612'}, ${zhToken.length}, ${zhWorkspaceId='***'}, ${zhInprogressId}`
+  console.log(`all info data:  ${nameToGreet}!, ${test}, ${gitref}, ${repoId}, ${zhToken}, ${zhWorkspaceId}, ${zhInprogressId}`);
+  const test = `${nameToGreet}, ${gitref}, ${repoId}, ${test}, ${zhToken.length}, ${zhWorkspaceId='***'}, ${zhInprogressId}`
 
   core.setOutput("output", test);
   // Get the JSON webhook payload for the event that triggered the workflow
