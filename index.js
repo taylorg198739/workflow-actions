@@ -9,10 +9,12 @@ try {
   const zhWorkspaceId = core.getInput('zh_workspace_id');
   const zhInprogressId = core.getInput('zh_in_progress_id');
   const issueNumber = parseInt(github.context.payload.ref.split('/')[2], 10);
+  console.log('payload: ',  github.context.payload);
   console.log('Issue Number: ', issueNumber);
   const isValidBranch = typeof issueNumber === 'number';
 
   if (isValidBranch) {
+    var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
     var http = new XMLHttpRequest();
     var url = `https://api.zenhub.com/p2/workspaces/${zhWorkspaceId}/repositories/${repoId}/issues/${ISSUE_NUMBER}/moves`;
     var params = `pipeline_id=${zhInprogressId}&position=top`;
