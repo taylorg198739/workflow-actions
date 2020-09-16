@@ -27,7 +27,7 @@ try {
       if(http.readyState == 4 && http.status == 200) {
         
         console.log('&&&&&&&&&&&& Response Text: ', JSON.stringify(http.responseText) );
-        var response = http.responseText;
+        var response = JSON.parse(http.responseText);
 
         // move card
         if (response.pipeline.name !== "In Progress") {
