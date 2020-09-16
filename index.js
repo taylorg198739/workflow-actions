@@ -1,5 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 try {
   // const nameToGreet = core.getInput('who-to-greet');
@@ -14,10 +15,13 @@ try {
   const isValidBranch = typeof issueNumber === 'number';
 
   if (isValidBranch) {
-    var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
     var http = new XMLHttpRequest();
     var url = `https://api.zenhub.com/p2/workspaces/${zhWorkspaceId}/repositories/${repoId}/issues/${issueNumber}/moves`;
-    var params = `pipeline_id=${zhInprogressId}&position=top`;
+    var content = {
+      'pipeline_id': zhInprogressId,
+      'position': 'top'
+    }
+    var params = JSON.stringify(content);
     http.open('POST', url, true);
     
     //Send the proper header information along with the request
@@ -25,6 +29,7 @@ try {
     http.setRequestHeader('Content-type', 'application/json');
     
     http.onreadystatechange = function() {//Call a function when the state changes.
+      console.log('^^^^^^ function started', http.status);
         if(http.readyState == 4 && http.status == 200) {
           // alert(http.responseText);
           console.log('&&&&&&&&&&&& Response Text: ', http.responseText);
