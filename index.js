@@ -18,10 +18,11 @@ try {
 
     var http = new XMLHttpRequest();
     var url = `https://api.zenhub.com/p1/repositories/${repoId}}/issues/${issueNumber}`;
-    http.open('GET', url);
+    http.open('GET', url, true);
+    console.log('$$$$$$$$$$$$ url: ', url);
     
     //Send the proper header information along with the request
-    http.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    // http.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     http.setRequestHeader('X-Authentication-Token', `${zhToken}`);
     
     http.onreadystatechange = function() {//Call a function when the state changes.
