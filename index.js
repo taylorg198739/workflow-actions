@@ -16,7 +16,7 @@ try {
   if (isValidBranch) {
     var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
     var http = new XMLHttpRequest();
-    var url = `https://api.zenhub.com/p2/workspaces/${zhWorkspaceId}/repositories/${repoId}/issues/${ISSUE_NUMBER}/moves`;
+    var url = `https://api.zenhub.com/p2/workspaces/${zhWorkspaceId}/repositories/${repoId}/issues/${issueNumber}/moves`;
     var params = `pipeline_id=${zhInprogressId}&position=top`;
     http.open('POST', url, true);
     
@@ -27,6 +27,7 @@ try {
     http.onreadystatechange = function() {//Call a function when the state changes.
         if(http.readyState == 4 && http.status == 200) {
           // alert(http.responseText);
+          console.log('&&&&&&&&&&&& Response Text: ', http.responseText);
         }
     }
     http.send(params);
