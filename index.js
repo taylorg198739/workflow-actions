@@ -15,28 +15,48 @@ try {
   const isValidBranch = typeof issueNumber === 'number';
 
   if (isValidBranch) {
+
     var http = new XMLHttpRequest();
-    var url = `https://api.zenhub.com/p2/workspaces/${zhWorkspaceId}/repositories/${repoId}/issues/${issueNumber}/moves`;
-    var content = {
-      'pipeline_id': zhInprogressId,
-      'position': 'top'
-    }
-    var params = JSON.stringify(content);
-    http.open('POST', url);
+    var url = `https://api.zenhub.com/p1/repositories/${repoId}}/issues/${issueNumber}`;
     
     //Send the proper header information along with the request
     http.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     http.setRequestHeader('X-Authentication-Token', `${zhToken}`);
-
     
     http.onreadystatechange = function() {//Call a function when the state changes.
-      console.log('^^^^^^ function started', http.status, http.getRequestHeader(), JSON.stringify(http.getRequestHeader()));
-        if(http.readyState == 4 && http.status == 200) {
-          // alert(http.responseText);
-          console.log('&&&&&&&&&&&& Response Text: ', http.responseText);
-        }
+      console.log('^^^^^^ function started', http.status, http.readyState);
+      if(http.status == 200) {
+        
+        // alert(http.responseText);
+        console.log('&&&&&&&&&&&& Response Text: ', http.responseText);
+      }
     }
-    http.send(params);
+    http.open('GET', url);
+    http.send(null);
+
+
+    // var http = new XMLHttpRequest();
+    // var url = `https://api.zenhub.com/p2/workspaces/${zhWorkspaceId}/repositories/${repoId}/issues/${issueNumber}/moves`;
+    // var content = {
+    //   'pipeline_id': zhInprogressId,
+    //   'position': 'top'
+    // }
+    // var params = JSON.stringify(content);
+    // http.open('POST', url);
+    
+    // //Send the proper header information along with the request
+    // http.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    // http.setRequestHeader('X-Authentication-Token', `${zhToken}`);
+    
+    // http.onreadystatechange = function() {//Call a function when the state changes.
+    //   console.log('^^^^^^ function started', http.status);
+    //     if(http.readyState == 4 && http.status == 200) {
+          
+    //       // alert(http.responseText);
+    //       console.log('&&&&&&&&&&&& Response Text: ', http.responseText);
+    //     }
+    // }
+    // http.send(params);
   }
 
   core.setOutput("output", isValidBranch);
