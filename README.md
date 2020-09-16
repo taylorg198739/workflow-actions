@@ -1,23 +1,22 @@
-# Hello world JavaScript action
+# Zenhub api integration JavaScript action
 
-This action prints "Hello World" or "Hello" + the name of a person to greet to the log. To learn how this action was built, see "[Creating a JavaScript action](https://help.github.com/en/articles/creating-a-javascript-action)" in the GitHub Help documentation.
+This action integrates Zenhub api. To learn how this action was built, see "[Creating a JavaScript action](https://help.github.com/en/articles/creating-a-javascript-action)" in the GitHub Help documentation.
 
 ## Inputs
 
-### `who-to-greet`
-
-**Required** The name of the person to greet. Default `"World"`.
+### `repo_id`, `zh_token`, `zh_workspace_id`, `zh_in_progress_id`
 
 ## Outputs
 
-### `time`
-
-The time we greeted you.
+### `Status Result`
 
 ## Example usage
 
 ```yaml
-uses: actions/hello-world-javascript-action@main
+uses: taylorg198739/workflow-actions@@main
 with:
-  who-to-greet: 'Mona the Octocat'
+  repo_id: 'Github Repo Id'
+  zh_token: 'Zenhub Token'
+  zh_workspace_id: 'Zenhub Workspace Id'
+  zh_in_progress_id: 'Zenhub In Progress column Id'
 ```
