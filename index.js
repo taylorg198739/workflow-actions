@@ -21,6 +21,7 @@ try {
     http.onreadystatechange = function() { //Call a function when the state changes.
       if(http.readyState == 4 && http.status == 200) {
         var response = JSON.parse(http.responseText);
+        status = "Fetch Data Success"
 
         // move card
         if (response.pipeline.name !== "In Progress") {
@@ -39,7 +40,7 @@ try {
           
           httpPost.onreadystatechange = function() { //Call a function when the state changes.
               if(httpPost.readyState == 4 && httpPost.status == 200) {
-                status = "Success"
+                status = "Move Card Success"
               }
           }
           httpPost.send(params);
