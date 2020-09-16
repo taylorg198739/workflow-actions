@@ -17,7 +17,7 @@ try {
   if (isValidBranch) {
 
     var http = new XMLHttpRequest();
-    var url = `https://api.zenhub.com/p1/repositories/${repoId}}/issues/${issueNumber}`;
+    var url = `https://api.zenhub.com/p1/repositories/${repoId}/issues/${issueNumber}`;
     http.open('GET', url);
     console.log('$$$$$$$$$$$$ url: ', url);
     
