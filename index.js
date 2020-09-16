@@ -24,7 +24,7 @@ try {
     
     http.onreadystatechange = function() {//Call a function when the state changes.
       console.log('^^^^^^ function started', http.status, http.readyState);
-      if(httpPost.readyState == 4 && http.status == 200) {
+      if(http.readyState == 4 && http.status == 200) {
         
         console.log('&&&&&&&&&&&& Response Text: ', JSON.stringify(http.responseText) );
         var response = http.responseText;
