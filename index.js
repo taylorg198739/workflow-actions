@@ -18,7 +18,7 @@ try {
 
     var http = new XMLHttpRequest();
     var url = `https://api.zenhub.com/p1/repositories/${repoId}}/issues/${issueNumber}`;
-    http.open('GET', url, true);
+    http.open('GET', url);
     console.log('$$$$$$$$$$$$ url: ', url);
     
     //Send the proper header information along with the request
