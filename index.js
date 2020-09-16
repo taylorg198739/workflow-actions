@@ -22,14 +22,15 @@ try {
       'position': 'top'
     }
     var params = JSON.stringify(content);
-    http.open('POST', url, true);
+    http.open('POST', url);
     
     //Send the proper header information along with the request
+    http.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     http.setRequestHeader('X-Authentication-Token', `${zhToken}`);
-    http.setRequestHeader('Content-type', 'application/json');
+
     
     http.onreadystatechange = function() {//Call a function when the state changes.
-      console.log('^^^^^^ function started', http.status);
+      console.log('^^^^^^ function started', http.status, http.getRequestHeader(), JSON.stringify(http.getRequestHeader()));
         if(http.readyState == 4 && http.status == 200) {
           // alert(http.responseText);
           console.log('&&&&&&&&&&&& Response Text: ', http.responseText);
