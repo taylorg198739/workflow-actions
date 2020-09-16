@@ -21,7 +21,7 @@ try {
     http.open('POST', url, true);
     
     //Send the proper header information along with the request
-    http.setRequestHeader(`X-Authentication-Token', ${zhToken}`);
+    http.setRequestHeader('X-Authentication-Token', `${zhToken}`);
     http.setRequestHeader('Content-type', 'application/json');
     
     http.onreadystatechange = function() {//Call a function when the state changes.
