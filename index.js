@@ -10,6 +10,7 @@ try {
   const issueNumber = parseInt(github.context.payload.ref.split('/')[0], 10);
   const isValidBranch = typeof issueNumber === 'number';
   let status = '';
+  console.log('------------ git data: ', JSON.stringify(github));
 
   if (isValidBranch) {
 
@@ -17,7 +18,7 @@ try {
     var url = `https://api.zenhub.com/p1/repositories/${repoId}/issues/${issueNumber}`;
     http.open('GET', url);
     http.setRequestHeader('X-Authentication-Token', `${zhToken}`);
-    
+
     http.onreadystatechange = function() { //Call a function when the state changes.
       if(http.readyState == 4 && http.status == 200) {
         var response = JSON.parse(http.responseText);
@@ -33,11 +34,11 @@ try {
           }
           var params = JSON.stringify(content);
           httpPost.open('POST', urlPost);
-          
+
           // Send the proper header information along with the request
           httpPost.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
           httpPost.setRequestHeader('X-Authentication-Token', `${zhToken}`);
-          
+
           httpPost.onreadystatechange = function() { //Call a function when the state changes.
               if(httpPost.readyState == 4 && httpPost.status == 200) {
                 status = "Move Card Success"
