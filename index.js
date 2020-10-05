@@ -8,6 +8,7 @@ try {
   const zhWorkspaceId = core.getInput('zh_workspace_id');
   const zhInprogressId = core.getInput('zh_in_progress_id');
   const action_name = core.getInput('action_name');
+  const not_merged_master = core.getInput('not_merged_master');
 
   if (action_name === 'create_branch') {
     const issueNumber = parseInt(github.context.payload.ref.split('/')[0], 10);
@@ -52,10 +53,11 @@ try {
       }
       http.send(null);
     }
-
     core.setOutput("output", status);
   } else if (action_name === 'merge_to_master') {
     console.log('------------ git data master: ', JSON.stringify(github));
+  } else if (action_name === 'test') {
+    console.log('------------ Test result JS: ', JSON.stringify(not_merged_master));
   }
 
 } catch (error) {
