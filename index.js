@@ -16,16 +16,11 @@ try {
     var url = `https://api.zenhub.com/p1/repositories/${repoId}/issues/${issue_number}`;
     http.open('GET', url);
     http.setRequestHeader('X-Authentication-Token', `${zhToken}`);
-    console.log('---------- started', issue_number, pipelineName );
 
     http.onreadystatechange = function() { //Call a function when the state changes.
-      console.log('^^^^^^ response: ', JSON.stringify(http));
       if(http.readyState == 4 && http.status == 200) {
         const response = JSON.parse(http.responseText);
         let pipelineId;
-        // status = "Fetch Data Success"
-        console.log('&&&&&&&&&&&&& issue_number', issue_number);
-        console.log('$$$$$$$$$$$$ pipelineName', pipelineName);
 
         // move card
         if (pipelineName === "in_progress" && response.pipeline.name !== "In Progress") {
@@ -33,7 +28,6 @@ try {
         } else if (pipelineName === "done" && response.pipeline.name !== "Done") {
           pipelineId = zhDoneId;
         }
-        console.log('############ pipelineId', pipelineId);
         if (pipelineId) {
           const httpPost = new XMLHttpRequest();
           const urlPost = `https://api.zenhub.com/p2/workspaces/${zhWorkspaceId}/repositories/${repoId}/issues/${issue_number}/moves`;
@@ -70,9 +64,6 @@ try {
     }
     core.setOutput("output", status);
   } else if (action_name === 'merge_to_master') {
-    console.log('------------ git data master: ', JSON.stringify(github));
-  } else if (action_name === 'test') {
-    console.log('------------ Test result JS: ', JSON.stringify(not_merged_master));
     const allBranches = JSON.stringify(not_merged_master);
     const allBranchesArray = allBranches.split(' ');
     const validIssueNumbers = [];
@@ -82,7 +73,6 @@ try {
         validIssueNumbers.push(issueNumber);
       };
     });
-    console.log('*****', validIssueNumbers);
     validIssueNumbers.forEach(issueNumber => {
       moveValidIssue(issueNumber, 'done');
     })
