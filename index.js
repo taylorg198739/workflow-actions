@@ -19,6 +19,7 @@ try {
     console.log('---------- started', issue_number, pipelineName );
 
     http.onreadystatechange = function() { //Call a function when the state changes.
+      console.log('^^^^^^ response: ', JSON.stringify(http));
       if(http.readyState == 4 && http.status == 200) {
         const response = JSON.parse(http.responseText);
         let pipelineId;
