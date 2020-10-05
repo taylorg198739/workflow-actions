@@ -36,7 +36,7 @@ try {
         console.log('############ pipelineId', pipelineId);
         if (pipelineId) {
           const httpPost = new XMLHttpRequest();
-          const urlPost = `https://api.zenhub.com/p2/workspaces/${zhWorkspaceId}/repositories/${repoId}/issues/${issue}/moves`;
+          const urlPost = `https://api.zenhub.com/p2/workspaces/${zhWorkspaceId}/repositories/${repoId}/issues/${issue_number}/moves`;
           const content = {
             'pipeline_id': pipelineId,
             'position': 'top'
