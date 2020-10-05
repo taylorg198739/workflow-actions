@@ -11,17 +11,20 @@ try {
   const action_name = core.getInput('action_name');
   const not_merged_master = core.getInput('not_merged_master');
 
-  function moveValidIssue(issue, pipelineName) {
+  function moveValidIssue(issue_number, pipelineName) {
     var http = new XMLHttpRequest();
-    var url = `https://api.zenhub.com/p1/repositories/${repoId}/issues/${issue}`;
+    var url = `https://api.zenhub.com/p1/repositories/${repoId}/issues/${issue_number}`;
     http.open('GET', url);
     http.setRequestHeader('X-Authentication-Token', `${zhToken}`);
+    console.log('---------- started', issue_number, pipelineName );
 
     http.onreadystatechange = function() { //Call a function when the state changes.
       if(http.readyState == 4 && http.status == 200) {
         const response = JSON.parse(http.responseText);
         let pipelineId;
         // status = "Fetch Data Success"
+        console.log('&&&&&&&&&&&&& issue_number', issue_number);
+        console.log('$$$$$$$$$$$$ pipelineName', pipelineName);
 
         // move card
         if (pipelineName === "in_progress" && response.pipeline.name !== "In Progress") {
@@ -29,6 +32,7 @@ try {
         } else if (pipelineName === "done" && response.pipeline.name !== "Done") {
           pipelineId = zhDoneId;
         }
+        console.log('############ pipelineId', pipelineId);
         if (pipelineId) {
           const httpPost = new XMLHttpRequest();
           const urlPost = `https://api.zenhub.com/p2/workspaces/${zhWorkspaceId}/repositories/${repoId}/issues/${issue}/moves`;
@@ -45,7 +49,7 @@ try {
 
           httpPost.onreadystatechange = function() { //Call a function when the state changes.
             if (httpPost.readyState == 4 && httpPost.status == 200) {
-              return "Move Card Success"
+              console.log("Move Card Success");
             }
           }
           httpPost.send(params);
